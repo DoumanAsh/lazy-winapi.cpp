@@ -29,3 +29,17 @@ cmake --build .
 * `UNIT_TEST` - build unit tests;
 * `BUILD_SHARED` - build shared library instead of static.
 
+Modules
+-------
+
+Each module has a corresponding `.c` & `.h` files.
+Module are independent of each other so you're free to take a particular module sources.
+And import it into your project.
+
+### Clipboard
+
+Windows Clipboard Utility.
+
+### Error
+
+WinAPI Error wrapper.

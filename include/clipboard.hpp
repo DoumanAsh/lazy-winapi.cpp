@@ -16,14 +16,102 @@
 #pragma warning(pop)
 #endif
 
-///WinAPI Clipboard Accessor.
-///
-///@note You can have only one instance of this class across your program.
+/**
+ * Provides utilities to acess Windows Clipboard.
+ *
+ * @warning Access to Clipboard from multiple threads isn't safe.
+ *
+ * General information
+ * ------------------
+ *
+ * ### Open clipboard
+ *
+ * To access any information inside clipboard it is necessary
+ * to open it by means of creating Clipboard instance.
+ *
+ * Clipboard is closed automatically once instance goes out of scope.
+ *
+ * Examples
+ * ---------
+ *
+ * ### Get current text on clipboard
+ *
+ * ~~~~~~~~~~~~~~~{.c}
+    #include "clipboard.hpp"
+
+    const Clipboard clip;
+    const auto text = clip.get_string();
+
+    if (text.size() > 0) {
+        std::cout  << "Content of clipboard=" << text << std::endl;
+    }
+    else {
+        std::cout << "No text on clipboard... \n";
+    }
+ * ~~~~~~~~~~~~~~~
+ *
+ * ### Get current unicode text on clipboard
+ *
+ * ~~~~~~~~~~~~~~~{.c}
+    #include "clipboard.hpp"
+
+    const Clipboard clip;
+    const auto text = clip.get_wstring();
+
+    if (text.size() > 0) {
+        std::cout  << "Content of clipboard=" << text << std::endl;
+    }
+    else {
+        std::cout << "No text on clipboard... \n";
+    }
+ * ~~~~~~~~~~~~~~~
+ *
+ * ### Set unicode text onto clipboard
+ *
+ * ~~~~~~~~~~~~~~~{.c}
+    #include "clipboard.hpp"
+
+    const Clipboard clip;
+    const std::wstring text = L"For my waifu! 2";
+
+    clip.set_string(text);
+ * ~~~~~~~~~~~~~~~
+ *
+ * ### Raw set onto clipboard
+ *
+ * ~~~~~~~~~~~~~~~{.c}
+    #include "clipboard.hpp"
+
+    const Clipboard clip;
+    const unsigned long format = CF_TEXT
+    const unit8_t data[] = {1, 2, 3, 4, 5, 0};
+
+    clip.set(format, text, sizeof(data) / sizeof(data[0]));
+ * ~~~~~~~~~~~~~~~
+ *
+ * ### Use own clipboard format.
+ *
+ * ~~~~~~~~~~~~~~~{.c}
+    #include "clipboard.hpp"
+
+    const std::wstring format_name = L"LOLI format";
+    const unsigned long format = Clipboard::register_format(format_name);
+
+    const Clipboard clip;
+    const uint8_t data[] = {1, 2, 3, 55, 2};
+
+    if (clip.set(format, data, sizeof(data))) {
+        printf("Successfully set data to my clipboard format.\n");
+    }
+    else {
+        printf("Failed to set data :(\n");
+    }
+ * ~~~~~~~~~~~~~~~
+ */
 class Clipboard {
     public:
         ///Opens clipboard
         ///
-        ///@constructor
         ///@throws runtime_error When fails to open Clipboard.
         Clipboard();
 
