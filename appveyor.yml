@@ -1,0 +1,17 @@
+os: Visual Studio 2017
+
+environment:
+  git_token:
+    secure: H5PQSeh6rHOoDLktlYlVLYu/iJMTwzzNVk8Wr//nqbYC7xrJuGDwKwiev/0Bl2d3
+
+install:
+  - mkdir build
+  - cd build/
+  - cmake ../
+
+build_script:
+  - cmake --build .
+
+test_script:
+  - ut.exe -j1
+  - cd ../
