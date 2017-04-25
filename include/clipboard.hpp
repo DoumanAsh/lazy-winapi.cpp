@@ -1,7 +1,7 @@
 /**
  * @file
  *
- * Source code of @ref Clipboard module.
+ * @ref Clipboard header.
  */
 
 #pragma once
@@ -23,6 +23,7 @@ class Clipboard {
     public:
         ///Opens clipboard
         ///
+        ///@constructor
         ///@throws runtime_error When fails to open Clipboard.
         Clipboard();
 

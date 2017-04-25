@@ -1,3 +1,9 @@
+/**
+ * @file
+ *
+ * @ref Clipboard source code.
+ */
+
 #include "clipboard.hpp"
 
 #if (_MSC_VER)
