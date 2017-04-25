@@ -17,13 +17,6 @@ class ClipboardTest: public ::testing::Test
         }
 };
 
-
-
-TEST_F(ClipboardTest, ShouldGetSeqNum)
-{
-    ASSERT_TRUE(Clipboard::seq_num());
-}
-
 TEST_F(ClipboardTest, ShouldSetClipboardText)
 {
     const unsigned long format = CF_TEXT;
@@ -136,3 +129,9 @@ TEST_F(ClipboardTest, RegisterFormat) {
 
     ASSERT_STREQ(data, extract_data);
 }
+
+TEST_F(ClipboardTest, ShouldGetSeqNum)
+{
+    ASSERT_TRUE(Clipboard::seq_num());
+}
+

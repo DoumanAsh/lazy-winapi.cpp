@@ -5,13 +5,21 @@ environment:
     secure: H5PQSeh6rHOoDLktlYlVLYu/iJMTwzzNVk8Wr//nqbYC7xrJuGDwKwiev/0Bl2d3
 
 install:
+  - ps: choco install doxygen.portable
   - mkdir build
   - cd build/
-  - cmake ../
+  - cmake -D UNIT_TEST=ON ../
 
 build_script:
   - cmake --build .
 
 test_script:
-  - ut.exe -j1
+  - .\Debug\utest.exe
   - cd ../
+
+on_success:
+  - ps: git config --global credential.helper store
+  - ps: git config --global user.email "douman@gmx.se"
+  - ps: git config --global user.name "Douman no Bot"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:git_token):x-oauth-basic@github.com`n"
+  - powershell -v 5 .\gen_docs.ps1

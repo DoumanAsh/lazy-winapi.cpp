@@ -1,6 +1,8 @@
 lazy-winapi.cpp
 =============
 
+[![Build status](https://ci.appveyor.com/api/projects/status/a8j2d8bvcky81k9y/branch/master?svg=true)](https://ci.appveyor.com/project/DoumanAsh/lazy-winapi-cpp/branch/master)
+
 Simple and lazy wrapper over WinAPI
 
 Requirements
@@ -32,7 +34,7 @@ cmake --build .
 Modules
 -------
 
-Each module has a corresponding `.c` & `.h` files.
+Each module has a corresponding `.cpp` & `.hpp` files.
 Module are independent of each other so you're free to take a particular module sources.
 And import it into your project.
 
